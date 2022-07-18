@@ -20,7 +20,7 @@ public class UserMdl {
     private Long id;
     
     @NotEmpty(message="Username is required!")
-    @Size(min=3, max=30, message="Username must be between 3 and 30 characters")
+    @Size(min=3, max=128, message="Username must be between 3 and 30 characters")
     private String userName;
     
     @NotEmpty(message="Email is required!")
@@ -28,19 +28,19 @@ public class UserMdl {
     private String email;
     
     @NotEmpty(message="Password is required!")
-    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
+    @Size(min=3, max=128, message="Password must be between 3 and 128 characters")
     private String password;
     
     @Transient
     @NotEmpty(message="Confirm Password is required!")
-    @Size(min=8, max=25, message="Confirm Password must be between 8 and 25 characters")
+    @Size(min=3, max=128, message="Confirm Password must be between 8 and 25 characters")
     private String confirm;
   
     public UserMdl() {}
 
     // begin G/S
-    
-	public Long getId() {
+
+    public Long getId() {
 		return id;
 	}
 
@@ -79,7 +79,9 @@ public class UserMdl {
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
 	}
+
     
+	    
     // end G/S
   
 }

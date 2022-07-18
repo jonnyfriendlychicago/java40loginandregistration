@@ -27,32 +27,21 @@ public class UserSrv{
     	// Reject if email is taken (present in database)
     	if(potentialUser.isPresent()) {
     		result.rejectValue("email", "Matches", "An account with that email already exists!");
+//    		return null;
     	}
     	
     	if(!newUser.getPassword().equals(newUser.getConfirm())) {
     		result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
+//    		return null;
     	}
     	
     	
     	
-    	String passwordEntered = newUser.getPassword(); //try to usethis later 
-//    	TO-DO: Additional validations!
-// 		TO-DO - Reject values or register if no errors:
-        
-        // Reject if email is taken (present in database)
-        // Reject if password doesn't match confirmation
-        
-        // Return null if result has errors
-    
-        // Hash and set password, save user to database
-        
-    	// Reject if password doesn't match confirmation
-        
+//    	String passwordEntered = newUser.getPassword(); //try to usethis later 
         
         // Return null if result has errors
         if(result.hasErrors()) {
-            // Exit the method and go back to the controller 
-            // to handle the response
+            // Exit the method and go back to the controller to handle the response
             return null;
         }
         

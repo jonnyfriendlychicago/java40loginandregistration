@@ -30,10 +30,10 @@
 		<a href= "/books">Books</a>
 		<a href= "/expenses">Expenses</a>
 		<a href= "/expensesAndCreate">expensesAndCreate</a>
-		<a href="/">Home</a> 
+		<a href="/welcome">Home</a> 
 		<a href="/dojo">Dojo List</a>
 		<a href= "/ninja">Ninja List</a>
-		<h2>Java App Home</h2>
+		<h2>Java App Login</h2>
 	</div>
 	<div id=main class="container-fluid">
 		<div id=registerLogin class="container-fluid">

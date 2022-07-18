@@ -29,8 +29,6 @@ import com.jonfriend.java40loginandregistration.models.UserMdl;
 import com.jonfriend.java40loginandregistration.services.UserSrv;
 
 @Controller
-
-
 public class HomeController {
 
 	// Add once service is implemented:
@@ -96,7 +94,7 @@ public class HomeController {
         model.addAttribute("currentCountGeld", currentCountGeld);
         
         
-        // login/reg form items
+        // login/reg form items: putting a new empty model (actually two mod) on the index page, so user can shove data onto using the form. 
         model.addAttribute("newUser", new UserMdl());
         model.addAttribute("newLogin", new LoginUserMdl());
 		return "index.jsp"; 
@@ -108,7 +106,9 @@ public class HomeController {
     		@Valid @ModelAttribute("newUser") UserMdl newUser
     		, BindingResult result
     		, Model model
-    		, HttpSession session) {
+    		, HttpSession session
+//    		, @ModelAttribute("newLogin") LoginUserMdl newLogin // added with JLee
+    		) {
         
     	UserMdl user = userSrv.register(newUser, result);
     	
@@ -116,16 +116,13 @@ public class HomeController {
         // to do some extra validations and create a new user!
         
         if(result.hasErrors()) {
-            // Be sure to send in the empty LoginUser before 
-            // re-rendering the page.
+            // Be sure to send in the empty LoginUser before re-rendering the page.
             model.addAttribute("newLogin", new LoginUserMdl());
             return "index.jsp";
         }
         
-        // No errors! 
-        // TO-DO Later: Store their ID from the DB in session, 
-        // in other words, log them in.
-    
+        // no errors?  here we go... 
+        //Store their ID from the DB in session, in other words, log them in.
         session.setAttribute("userId", user.getId());
    	 
 	    return "redirect:/welcome";
@@ -164,7 +161,7 @@ public class HomeController {
 			Model model
 			, HttpSession session) {
 	 
-		// If no userId is found, redirect to logout
+		// If no userId is found, redirect to logout.  JRF: put this on basically all methods now, except the login/reg pages
 		if(session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
