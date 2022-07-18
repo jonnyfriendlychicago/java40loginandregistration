@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jonfriend.java40loginandregistration.models.DojoMdl;
 import com.jonfriend.java40loginandregistration.services.DojoSrv;
@@ -103,7 +104,8 @@ public class DojoCtl {
 //******************************************************************************************
 	
     // display list of all records, with create form
-	@RequestMapping("/dojo")
+//	@RequestMapping("/dojo") // changed 7-16 330pm
+	@GetMapping("/dojo")
 	public String dojo(@ModelAttribute("dojo") DojoMdl dojoMdl , Model model) {
 		List<DojoMdl> intVar = dojoSrv.returnAll();
 		model.addAttribute("dojoList", intVar); 
@@ -169,17 +171,21 @@ public class DojoCtl {
 	}
 	
     @DeleteMapping("/dojo/{dojoId}")
-    public String displayAllDeleteOne(@PathVariable("dojoId") Long dojoId) {
-//    	if the count of items in dojo.NinjaMdl list is > 0, error this guy and redirect to screeen
+    public String displayAllDeleteOne(@PathVariable("dojoId") Long dojoId, RedirectAttributes redirectAttributes) {
+//    	if the count of items in dojo.NinjaMdl list is > 0, error this method and redirect to screeen with a error msg.  flashMsg format? 
 //    	else, yeah, whack it
     	
-//    	DojoMdl dojoTargetedForDel = dojoSrv.findById(dojoId);
-//    	
-//    	if ( dojoTargetedForDel.NinjaMdl )
     	
+    	DojoMdl intVar = dojoSrv.findById(dojoId);
     	
-    	dojoSrv.delete(dojoId);
-        return "redirect:/dojo";
+    	// in below, the get... is used instead of the ninjaList atty b/c it's private, need to use the getter instead
+    	if ( intVar.getNinjaList().size() > 0 ) {
+    		redirectAttributes.addFlashAttribute("errorThang", "JRF error buddy!");
+    		return "redirect:/dojo";
+    		
+    	} 
+		dojoSrv.delete(dojoId);
+		return "redirect:/dojo";	
     }
     
  // view one record

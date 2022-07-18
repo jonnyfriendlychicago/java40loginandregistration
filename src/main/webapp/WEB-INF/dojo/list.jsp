@@ -33,26 +33,23 @@
 	
 	<div id=main class="container-fluid">
 		<div id=list class="container-fluid">
+		  <p>${errorThang}</p>
 			<table class="table table-striped">
 			  <thead>
 			    <tr>
 					<th scope="col">id</th>
 			      	<th scope="col">dojoName</th>
-			      	<!-- <th scope="col">lastName</th>
-			      	<th scope="col">license State - Num!</th> -->
-			      	
 					<th scope="col">Actions</th> 
 			    </tr>
 			  </thead>
 			  <tbody>
+			  
 			    <c:forEach var="record" items="${dojoList}">
 			        <tr>
 				      <td >
 				      	<a href= "/dojo/${record.id}">${record.id}</a>
 				      </td>
 				      <td>${record.dojoName}</td>
-				      <%-- <td>${record.lastName}</td>
-				      <td>${record.licenseMdl.issuingState} - ${record.licenseMdl.licenseNumber}</td> --%>
 				      
 						<td>
 				      		<a href= "/dojo/${record.id}/edit">Edit</a>

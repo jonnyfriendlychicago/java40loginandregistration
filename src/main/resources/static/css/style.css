@@ -47,3 +47,8 @@ h2 {
   	height: 3rem; 
   	
 }
+
+#registerLogin2 {
+	display: flex; 
+	justify-content: center;
+}
